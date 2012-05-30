@@ -1,0 +1,1 @@
+/home/bpotter/.config/awesome/rc.lua
