@@ -13,7 +13,6 @@ set backspace=2  " backspace can join lines
 set joinspaces   " insert two spaces after a period after line join
 set hh=0         " this combined with ea should autobalance help
 set magic        " do the right thing with regex's
-set nobackup     " backups are for wimps!
 set backupdir=/home/bpotter/.backup,/data/tmp,/tmp
 set directory=/home/bpotter/.backup,/data/tmp,/tmp
 set ruler        " display row,col ruler
@@ -60,6 +59,12 @@ filetype plugin indent on
 "[ASCII=\%03.3b]\ [HEX=\%02.2B]\
 :set laststatus=2
 
+if exists('+colorcolumn')
+  set colorcolumn=80
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
 "Wrap with h and l
 set whichwrap=h,l,~,[,]
 
@@ -73,7 +78,8 @@ noremap <Ins> 2<C-Y>
 noremap <Del> 2<C-E>
 nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
-nnoremap <C-T> :set linebreak wrap spell<CR>
+nnoremap <C-I> :set linebreak wrap spell<CR>
+nnoremap <C-T> :CommandT<CR>
 nnoremap <C-Y> :set linebreak wrap<CR>
 nnoremap <C-D> :set nolinebreak nowrap nospell paste smartindent<CR>
 "Latex Acroynmn and Latex Mode
@@ -133,3 +139,9 @@ set guifont=Ubuntu\ Mono\ 14
 "autocmd FileAppendPre *  :call TrimWhiteSpace()
 "autocmd FilterWritePre * :call TrimWhiteSpace()
 "autocmd BufWritePre *    :call TrimWhiteSpace()
+
+" Highlight indentation level
+autocmd VimEnter * :IndentGuidesEnable
+let g:indent_guides_auto_colors = 0
+hi IndentGuidesOdd  guibg=#073642 ctermbg=8
+hi IndentGuidesEven guibg=#002b36 ctermbg=0

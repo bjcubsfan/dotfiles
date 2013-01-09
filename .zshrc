@@ -6,6 +6,10 @@ export PROJECT_DIR=/wmd/software/$PROJECT_CYCLE
 
 umask 002
 
+#Use vi mode
+set -o vi
+bindkey -v
+
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="bpotter"
@@ -14,6 +18,7 @@ export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 setopt INTERACTIVE_COMMENTS
+setopt EXTENDED_GLOB
 source ~/.git_completion.sh
 
 # Customize to your needs...
@@ -36,6 +41,9 @@ alias less="less -FRSX"
 alias cbcopy="xsel --clipboard --input"
 alias cbpaste="xsel --clipboard --output"
 alias o="gnome-open"
+alias sit="$HOME/code/personal/bpotter/sit_stand_log.py -s"
+alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
+alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 
 
 # Aliases for servers
@@ -46,19 +54,18 @@ alias gs='git status '
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit --verbose'
-alias gd='git diff'
+alias gd='git diff --color'
 alias go='git checkout '
-alias gk='gitk --all&'
-alias gx='gitx --all'
 alias gh='git hist'
+alias grb='for remote in `git branch -r | grep -v master `; do git checkout --track $remote ; done'
 
 alias got='git '
 alias get='git '
 alias hit='git '
 
 PATH=$PATH:$HOME/bin/:$HOME/code/anomaly_tools/bin
-export PYTHONPATH=/home/bpotter/lib/python:/home/bpotter/code/anomaly_tools/lib/python:/home/bpotter/code/waas_processor/python/src
-export PYTHONPATH=$PYTHONPATH:/usr/share/pycentral/lsr:/opt/modok_django:/opt/modok_django/wsmon:$PROJECT_DIR/python
+export PYTHONPATH=$HOME/lib/python:$HOME/code/anomaly_tools/lib/python:$HOME/code/waas_processor/python/src
+export PYTHONPATH=$PYTHONPATH:/usr/share/pycentral/lsr:/opt/modok_django:/opt/modok_django/wsmon:$PROJECT_DIR/python:/wmd/software/prod/tools/lib
 export LD_LIBRARY_PATH=/lib
 
 # Testing for cx_Oracle_with_ctypes
@@ -88,4 +95,13 @@ if [ "$TERM" = "linux" ]; then
         echo -en "$i"
     done
     clear
+fi
+
+#OSX specific
+if [ "`uname`" = "Darwin" ];then
+alias ls='ls -CFG'
+alias gvim=mvim
+PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
+export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/7.2/bin/
+export PATH=/usr/local/bin:$PATH # brew on osx
 fi
