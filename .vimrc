@@ -145,3 +145,11 @@ autocmd VimEnter * :IndentGuidesEnable
 let g:indent_guides_auto_colors = 0
 hi IndentGuidesOdd  guibg=#073642 ctermbg=8
 hi IndentGuidesEven guibg=#002b36 ctermbg=0
+
+" Insert date stamps
+nmap <F3> a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+" Insert pdb line
+nmap <F5> Oimport pdb; pdb.set_trace()<Esc>
+imap <F5> import pdb; pdb.set_trace()

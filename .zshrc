@@ -44,6 +44,8 @@ alias o="gnome-open"
 alias sit="$HOME/code/personal/bpotter/sit_stand_log.py -s"
 alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
+function cdw() {
+  cd `cdw.py "$@"`;}
 
 
 # Aliases for servers
@@ -63,9 +65,10 @@ alias got='git '
 alias get='git '
 alias hit='git '
 
-PATH=$PATH:$HOME/bin/:$HOME/code/anomaly_tools/bin
+PATH=$PATH:$HOME/bin/:$HOME/code/tools/bin
 export PYTHONPATH=$HOME/lib/python:$HOME/code/anomaly_tools/lib/python:$HOME/code/waas_processor/python/src
 export PYTHONPATH=$PYTHONPATH:/usr/share/pycentral/lsr:/opt/modok_django:/opt/modok_django/wsmon:$PROJECT_DIR/python:/wmd/software/prod/tools/lib
+export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/site-packages
 export LD_LIBRARY_PATH=/lib
 
 # Testing for cx_Oracle_with_ctypes
@@ -101,7 +104,13 @@ fi
 if [ "`uname`" = "Darwin" ];then
 alias ls='ls -CFG'
 alias gvim=mvim
+alias vimdiff=mvim -d
+alias o=open
 PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/7.2/bin/
-export PATH=/usr/local/bin:$PATH # brew on osx
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH # brew on osx
+export PATH=/usr/local/share/python:$PATH # brew python
+# export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
+export PYTHONPATH=~/src:~/src/tools/lib:$PYTHONPATH
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
