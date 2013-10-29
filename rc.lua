@@ -14,7 +14,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
-
+vicious.contrib = require("vicious.contrib")
+local icon_path = awful.util.getdir("config").."/icons/"
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -40,6 +41,57 @@ do
     end)
 end
 -- }}}
+
+--{{{ Pulseaudio
+local pulseicon = wibox.widget.imagebox()
+pulseicon:set_image(icon_path.."volume.png")
+-- Initialize widgets
+local pulsewidget = wibox.widget.textbox()
+local pulsebar    = awful.widget.progressbar()
+local pulsebox    = wibox.layout.margin(pulsebar, 2, 2, 4, 4)
+
+-- Progressbar properties
+pulsebar:set_width(8)
+pulsebar:set_height(10)
+pulsebar:set_ticks(true)
+pulsebar:set_ticks_size(2)
+pulsebar:set_vertical(true)
+pulsebar:set_background_color(beautiful.fg_off_widget)
+pulsebar:set_color(beautiful.fg_widget)
+-- Bar from green to red
+pulsebar:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 30 },
+     stops = { { 0, "#AECF96" }, { 1, "#FF5656" } } })
+
+-- Enable caching
+vicious.cache(vicious.contrib.pulse)
+
+local function pulse_volume(delta)
+  vicious.contrib.pulse.add(delta)
+  vicious.force({ pulsewidget, pulsebar})
+end
+
+local function pulse_toggle()
+  vicious.contrib.pulse.toggle(delta)
+  vicious.force({ pulsewidget, pulsebar})
+end
+
+vicious.register(pulsebar, vicious.contrib.pulse, "$1",  5)
+vicious.register(pulsewidget, vicious.contrib.pulse,
+function (widget, args)
+   return string.format("%.f%%", args[1])
+end, 7)
+
+pulsewidget:buttons(awful.util.table.join(
+awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end), --left click
+awful.button({ }, 2,
+function () pulse_toggle() end),
+awful.button({ }, 4, -- scroll up
+   function () pulse_volume(5)  end),
+awful.button({ }, 5, -- scroll down
+   function () pulse_volume(-5) end)))
+pulsebar:buttons( pulsewidget:buttons() )
+pulseicon:buttons( pulsewidget:buttons() )
+--}}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -264,7 +316,11 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+    --Volume keyboard control
+    awful.key({ }, "XF86AudioRaiseVolume", function () pulse_volume(5) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () pulse_volume(-5)end),
+    awful.key({ }, "XF86AudioMute",        function () pulse_toggle()  end)
 )
 
 clientkeys = awful.util.table.join(
@@ -421,3 +477,32 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+function run_once(prg,arg_string,pname,screen)
+    if not prg then
+        do return nil end
+    end
+
+    if not pname then
+       pname = prg
+    end
+
+    if not arg_string then 
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")",screen)
+    else
+        awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")",screen)
+    end
+end
+
+-- B. J.'s startup programs
+run_once("xscreensaver","-no-splash")
+run_once("pidgin",nil,nil,1)
+run_once("dropboxd") --awful.util.spawn_with_shell("xchat")
+run_once("xchat")
+run_once("chromium")
+run_once("gnome-do")
+run_once("xmodmap", "/home/bpotter/.Xmodmap")
+run_once("xscreensaver")
+run_once("gtimelog")
+run_once("gnome-terminal")
+run_once("rhythmbox")
+run_once("virtualbox", nil, nil, 2)
