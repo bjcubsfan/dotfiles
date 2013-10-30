@@ -317,6 +317,7 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({ }, "XF86Favorites", function () awful.util.spawn("xscreensaver-command -lock") end),
     --Volume keyboard control
     awful.key({ }, "XF86AudioRaiseVolume", function () pulse_volume(5) end),
     awful.key({ }, "XF86AudioLowerVolume", function () pulse_volume(-5)end),
