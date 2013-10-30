@@ -35,7 +35,6 @@ alias hg="history | grep"
 alias ansi="gcc -Wall -pedantic -ansi"
 alias grep="egrep"
 alias duh="du -h --max-depth=1"
-alias ack="ack-grep"
 alias rscp="rsync -aP"
 alias less="less -FRSX"
 alias cbcopy="xsel --clipboard --input"
@@ -46,10 +45,6 @@ alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 function cdw() {
   cd `cdw.py "$@"`;}
-
-
-# Aliases for servers
-alias waasccaix="ssh bpott@waasccaix"
 
 # git aliases
 alias gs='git status '
@@ -65,7 +60,7 @@ alias got='git '
 alias get='git '
 alias hit='git '
 
-PATH=$PATH:$HOME/bin/:$HOME/code/tools/bin
+PATH=$PATH:$HOME/bin:$HOME/code/tools/bin
 export PYTHONPATH=$HOME/lib/python:$HOME/code/anomaly_tools/lib/python:$HOME/code/waas_processor/python/src
 export PYTHONPATH=$PYTHONPATH:/usr/share/pycentral/lsr:/opt/modok_django:/opt/modok_django/wsmon:$PROJECT_DIR/python:/wmd/software/prod/tools/lib
 export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/site-packages
@@ -108,9 +103,14 @@ alias vimdiff=mvim -d
 alias o=open
 PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH # brew on osx
-export PATH=/usr/local/share/python:$PATH # brew python
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
 export PYTHONPATH=~/src:~/src/tools/lib:$PYTHONPATH
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# Gnome-terminal fix to open in same dir
+chpwd_functions+=(__vte_osc7) # or replace __vte_ps1 with __vte_osc7 after updating vte to 0.34.5
