@@ -29,6 +29,7 @@ set hlsearch     " Highlight Search Results
 set background=dark "If you use a dark background set this to make the fonts a better c
 set nowrap
 syntax enable
+syntax on
 set paste
 set ruler
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -55,6 +56,7 @@ set wm=8
 set textwidth=72
 filetype plugin on
 filetype plugin indent on
+filetype indent plugin on
 :set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 "[ASCII=\%03.3b]\ [HEX=\%02.2B]\
 :set laststatus=2
@@ -151,5 +153,9 @@ nmap <F3> a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 
 " Insert pdb line
-nmap <F5> Oimport pdb; pdb.set_trace()<Esc>
-imap <F5> import pdb; pdb.set_trace()
+nmap <F5> Oimport pdb; pdb.set_trace()<CR><Esc>
+imap <F5> import pdb; pdb.set_trace()<CR>
+
+" Insert pudb line
+nmap <F6> Oimport pudb; pudb.set_trace()<CR><Esc>
+imap <F6> import pudb; pudb.set_trace()<CR>
