@@ -1,6 +1,6 @@
  [user]
      name = B. J. Potter
-     email = bj.ctr.potter@faa.gov
+     email = bjcubsfan@server.fake
  [core]
      editor = vi
      autocrlf = input
@@ -35,6 +35,3 @@
      added = yellow
      changed = green
      untracked = cyan
-
-[push]
-	default = simple
