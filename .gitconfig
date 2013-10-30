@@ -35,3 +35,7 @@
      added = yellow
      changed = green
      untracked = cyan
+ # Need to set this to squelch message
+ # This will push to upstream only if same name
+ [push]
+	default = simple
