@@ -39,10 +39,11 @@ alias rscp="rsync -aP"
 alias less="less -FRSX"
 alias cbcopy="xsel --clipboard --input"
 alias cbpaste="xsel --clipboard --output"
-alias o="gnome-open"
+alias o="mimeopen" #xdg-open is flakey
 alias sit="$HOME/code/personal/bpotter/sit_stand_log.py -s"
 alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
+alias oocalc="libreoffice --calc"
 function cdw() {
   cd `cdw.py "$@"`;}
 
@@ -61,19 +62,8 @@ alias get='git '
 alias hit='git '
 
 PATH=$PATH:$HOME/bin:$HOME/code/tools/bin
-export PYTHONPATH=$HOME/lib/python:$HOME/code/anomaly_tools/lib/python:$HOME/code/waas_processor/python/src
-export PYTHONPATH=$PYTHONPATH:/usr/share/pycentral/lsr:/opt/modok_django:/opt/modok_django/wsmon:$PROJECT_DIR/python:/wmd/software/prod/tools/lib
-export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/site-packages
+export PYTHONPATH="/home/bpotter/code/tools/lib/"
 export LD_LIBRARY_PATH=/lib
-
-# Testing for cx_Oracle_with_ctypes
-# export PYTHONPATH=/opt/cx_oracle_on_ctypes/
-# export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib
-# export NLS_LANG=.UTF8
-# export CX_ORACLE_USERNAME=cx_Oracle
-# export CX_ORACLE_PASSWORD=dev
-# export CX_ORACLE_TNSENTRY=XE
-# export CX_ORACLE_ARRAY_SIZE=1024
 
 export VISUAL=vim
 export EDITOR=vim
@@ -95,7 +85,7 @@ if [ "$TERM" = "linux" ]; then
     clear
 fi
 
-#OSX specific
+#Mac OSX specific
 if [ "`uname`" = "Darwin" ];then
 alias ls='ls -CFG'
 alias gvim=mvim
@@ -104,7 +94,7 @@ alias o=open
 PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH # brew on osx
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
-export PYTHONPATH=~/src:~/src/tools/lib:$PYTHONPATH
+export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

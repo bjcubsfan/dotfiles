@@ -1,6 +1,6 @@
  [user]
      name = B. J. Potter
-     email = bjcubsfan@server.fake
+     email = bjcubsfan@users.noreply.github.com
  [core]
      editor = vi
      autocrlf = input
@@ -38,4 +38,4 @@
  # Need to set this to squelch message
  # This will push to upstream only if same name
  [push]
-	default = simple
+	default = current
