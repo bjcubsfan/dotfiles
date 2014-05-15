@@ -6,20 +6,19 @@ export PROJECT_DIR=/wmd/software/$PROJECT_CYCLE
 
 umask 002
 
-#Use vi mode
-set -o vi
-bindkey -v
-
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="bpotter"
 
 export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
+export  HISTSIZE=100000
 unsetopt correct_all
 setopt INTERACTIVE_COMMENTS
 setopt EXTENDED_GLOB
+setopt NULL_GLOB
 source ~/.git_completion.sh
+source ~/.local_secrets.sh
 
 # Customize to your needs...
 
@@ -39,13 +38,14 @@ alias rscp="rsync -aP"
 alias less="less -FRSX"
 alias cbcopy="xsel --clipboard --input"
 alias cbpaste="xsel --clipboard --output"
-alias o="mimeopen" #xdg-open is flakey
 alias sit="$HOME/code/personal/bpotter/sit_stand_log.py -s"
 alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 alias oocalc="libreoffice --calc"
-function cdw() {
-  cd `cdw.py "$@"`;}
+alias sum="sha1sum"
+alias hash="sha1sum"
+function cdw() {cd `cdw.py "$@"`;}
+function o() {/usr/bin/vendor_perl/mimeopen "$@"&;} #xdg-open is flakey
 
 # git aliases
 alias gs='git status '
@@ -104,3 +104,14 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # Gnome-terminal fix to open in same dir
 chpwd_functions+=(__vte_osc7) # or replace __vte_ps1 with __vte_osc7 after updating vte to 0.34.5
+
+#Use vi mode
+set -o vi
+bindkey -v
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+export KEYTIMEOUT=1
