@@ -65,14 +65,16 @@ pulsebar:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 30 },
 -- Enable caching
 vicious.cache(vicious.contrib.pulse)
 
-local function pulse_volume(delta)
-  vicious.contrib.pulse.add(delta)
-  vicious.force({ pulsewidget, pulsebar})
+local function vol_up()
+  awful.util.spawn("amixer set Master 1000+")
 end
 
-local function pulse_toggle()
-  vicious.contrib.pulse.toggle(delta)
-  vicious.force({ pulsewidget, pulsebar})
+local function vol_down()
+  awful.util.spawn("amixer set Master 1000-")
+end
+
+local function vol_mute()
+  awful.util.spawn("amixer sset Master toggle")
 end
 
 vicious.register(pulsebar, vicious.contrib.pulse, "$1",  5)
@@ -319,9 +321,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
     awful.key({ }, "XF86Favorites", function () awful.util.spawn("xscreensaver-command -lock") end),
     --Volume keyboard control
-    awful.key({ }, "XF86AudioRaiseVolume", function () pulse_volume(5) end),
-    awful.key({ }, "XF86AudioLowerVolume", function () pulse_volume(-5)end),
-    awful.key({ }, "XF86AudioMute",        function () pulse_toggle()  end)
+    awful.key({ }, "XF86AudioRaiseVolume", function () vol_up() end),
+    awful.key({ }, "XF86AudioLowerVolume", function () vol_down()end),
+    awful.key({ }, "XF86AudioMute",        function () vol_mute()  end)
 )
 
 clientkeys = awful.util.table.join(
