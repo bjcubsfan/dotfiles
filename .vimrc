@@ -134,7 +134,7 @@ map <C-c> :call EnhancedCommentify('','guess')<CR>
 vmap cc :call EnhancedCommentify('','comment')<CR>
 vmap cd :call EnhancedCommentify('','decomment')<CR>
 
-set guifont=Ubuntu\ Mono\ 14  
+set guifont=Ubuntu\ Mono\ 14
 " If you want, you can have whitespace cleaned up automatically on write
 " Uncomment to enable white space removal on write
 "autocmd FileWritePre *   :call TrimWhiteSpace()
@@ -159,3 +159,4 @@ imap <F5> import pdb; pdb.set_trace()<CR>
 " Insert pudb line
 nmap <F6> Oimport pudb; pudb.set_trace()<CR><Esc>
 imap <F6> import pudb; pudb.set_trace()<CR>
+
