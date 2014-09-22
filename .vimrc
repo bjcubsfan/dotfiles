@@ -78,6 +78,8 @@ nnoremap + :put!"=<CR>
 "noremap <Space> <PageDown>
 noremap <Ins> 2<C-Y>
 noremap <Del> 2<C-E>
+"nnoremap <C-N> :write<CR>:next<CR>
+"nnoremap <C-P> :write<CR>:prev<CR>
 nnoremap <C-N> :next<CR>
 nnoremap <C-P> :prev<CR>
 nnoremap <C-I> :set linebreak wrap spell<CR>
@@ -86,7 +88,7 @@ nnoremap <C-Y> :set linebreak wrap<CR>
 nnoremap <C-D> :set nolinebreak nowrap nospell paste smartindent<CR>
 "Latex Acroynmn and Latex Mode
 nnoremap <C-A> T i\ac{<Esc>t a}<Esc>
-nnoremap <C-L> :set tw=72 nopaste spell nosmartindent<CR>
+nnoremap <C-L> :set tw=72 nopaste spell nosmartindent nowrap nolinebreak<CR>
 
 "C options
 set comments=sl:/**,mb:**,elx:*/
@@ -134,7 +136,7 @@ map <C-c> :call EnhancedCommentify('','guess')<CR>
 vmap cc :call EnhancedCommentify('','comment')<CR>
 vmap cd :call EnhancedCommentify('','decomment')<CR>
 
-set guifont=Ubuntu\ Mono\ 14
+set guifont=Ubuntu\ Mono\ 13
 " If you want, you can have whitespace cleaned up automatically on write
 " Uncomment to enable white space removal on write
 "autocmd FileWritePre *   :call TrimWhiteSpace()

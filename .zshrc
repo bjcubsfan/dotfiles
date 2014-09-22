@@ -18,11 +18,13 @@ setopt INTERACTIVE_COMMENTS
 setopt EXTENDED_GLOB
 setopt NULL_GLOB
 source ~/.git_completion.sh
+source ~/.pycompletion.sh
 source ~/.local_secrets.sh
 
 # Customize to your needs...
 
 # Aliases for commands
+alias vi="vim"
 alias ssh="ssh -Y"
 alias nano="nano -w"
 alias ff="find . -type f -iname 2>/dev/null"
@@ -43,7 +45,7 @@ alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 alias oocalc="libreoffice --calc"
 alias sum="sha1sum"
-alias hash="sha1sum"
+alias h="sha1sum"
 function cdw() {cd `cdw.py "$@"`;}
 function o() {/usr/bin/vendor_perl/mimeopen "$@"&;} #xdg-open is flakey
 
@@ -92,7 +94,7 @@ alias gvim=mvim
 alias vimdiff=mvim -d
 alias o=open
 PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH # brew on osx
+export PATH=/usr/local/bin:/usr/local/sbin:/Applications:/Users/bpotter/miniconda3/bin/:$PATH # brew on osx
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
 export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
 fi
