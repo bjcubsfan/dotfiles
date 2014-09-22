@@ -1,8 +1,8 @@
  [user]
      name = B. J. Potter
-     email = bjcubsfan@users.noreply.github.com
+     email = bjpotter@gmail.com
  [core]
-     editor = vi
+     editor = vim
      autocrlf = input
      safecrlf = true
      pager = less -FRSX
