@@ -42,59 +42,6 @@ do
 end
 -- }}}
 
---{{{ Pulseaudio
-local pulseicon = wibox.widget.imagebox()
-pulseicon:set_image(icon_path.."volume.png")
--- Initialize widgets
-local pulsewidget = wibox.widget.textbox()
-local pulsebar    = awful.widget.progressbar()
-local pulsebox    = wibox.layout.margin(pulsebar, 2, 2, 4, 4)
-
--- Progressbar properties
-pulsebar:set_width(8)
-pulsebar:set_height(10)
-pulsebar:set_ticks(true)
-pulsebar:set_ticks_size(2)
-pulsebar:set_vertical(true)
-pulsebar:set_background_color(beautiful.fg_off_widget)
-pulsebar:set_color(beautiful.fg_widget)
--- Bar from green to red
-pulsebar:set_color({ type = "linear", from = { 0, 0 }, to = { 0, 30 },
-     stops = { { 0, "#AECF96" }, { 1, "#FF5656" } } })
-
--- Enable caching
-vicious.cache(vicious.contrib.pulse)
-
-local function vol_up()
-  awful.util.spawn("amixer set Master 1000+")
-end
-
-local function vol_down()
-  awful.util.spawn("amixer set Master 1000-")
-end
-
-local function vol_mute()
-  awful.util.spawn("amixer sset Master toggle")
-end
-
-vicious.register(pulsebar, vicious.contrib.pulse, "$1",  5)
-vicious.register(pulsewidget, vicious.contrib.pulse,
-function (widget, args)
-   return string.format("%.f%%", args[1])
-end, 7)
-
-pulsewidget:buttons(awful.util.table.join(
-awful.button({ }, 1, function () awful.util.spawn("pavucontrol") end), --left click
-awful.button({ }, 2,
-function () pulse_toggle() end),
-awful.button({ }, 4, -- scroll up
-   function () pulse_volume(5)  end),
-awful.button({ }, 5, -- scroll down
-   function () pulse_volume(-5) end)))
-pulsebar:buttons( pulsewidget:buttons() )
-pulseicon:buttons( pulsewidget:buttons() )
---}}}
-
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/bpotter/.config/awesome/themes/bj_theme/theme.lua")
@@ -117,8 +64,7 @@ local layouts =
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.floating
+    awful.layout.suit.tile.top
 }
 -- }}}
 
@@ -146,9 +92,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal }
                                   }
                         })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -228,13 +171,12 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    if s == 2 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -319,11 +261,11 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
-    awful.key({ }, "XF86Favorites", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({ }, "XF86Explorer", function () awful.util.spawn("xscreensaver-command -lock") end),
     --Volume keyboard control
-    awful.key({ }, "XF86AudioRaiseVolume", function () vol_up() end),
-    awful.key({ }, "XF86AudioLowerVolume", function () vol_down()end),
-    awful.key({ }, "XF86AudioMute",        function () vol_mute()  end)
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl up") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl down") end),
+    awful.key({ }, "XF86AudioMute",        function () awful.util.spawn_with_shell("pulseaudio-ctl mute") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -403,10 +345,6 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
     { rule = { class = "rdesktop" },
       properties = { floating = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -489,7 +427,7 @@ function run_once(prg,arg_string,pname,screen)
        pname = prg
     end
 
-    if not arg_string then 
+    if not arg_string then
         awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. "' || (" .. prg .. ")",screen)
     else
         awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " ".. arg_string .."' || (" .. prg .. " " .. arg_string .. ")",screen)
@@ -501,9 +439,7 @@ run_once("xscreensaver","-no-splash")
 run_once("pidgin",nil,nil,1)
 run_once("dropboxd")
 run_once("/opt/gtimelog/gtimelog")
-run_once("xchat")
-run_once("chromium")
 run_once("gnome-do")
 run_once("xmodmap", "/home/bpotter/.Xmodmap")
-run_once("gnome-terminal")
-run_once("rhythmbox")
+--run_once("xchat")
+--run_once("rhythmbox")
