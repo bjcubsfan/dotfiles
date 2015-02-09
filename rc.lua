@@ -261,7 +261,7 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end),
-    awful.key({ }, "XF86Explorer", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({ }, "XF86PowerOff", function () awful.util.spawn("xscreensaver-command -lock") end),
     --Volume keyboard control
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl up") end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl down") end),
@@ -270,7 +270,7 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey,           }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
@@ -360,7 +360,6 @@ client.connect_signal("manage", function (c, startup)
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
-            client.focus = c
         end
     end)
 
@@ -436,10 +435,8 @@ end
 
 -- B. J.'s startup programs
 run_once("xscreensaver","-no-splash")
-run_once("pidgin",nil,nil,1)
 run_once("dropboxd")
-run_once("/opt/gtimelog/gtimelog")
 run_once("gnome-do")
 run_once("xmodmap", "/home/bpotter/.Xmodmap")
---run_once("xchat")
---run_once("rhythmbox")
+run_once("/bin/bash /usr/bin/devmon")
+--run_once("pidgin", "--config=/home/bpotter/Private/chat_logs/pidgin")
