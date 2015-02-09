@@ -1,15 +1,10 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
-
-export PROJECT_CYCLE=dev
-export PROJECT_DIR=/wmd/software/$PROJECT_CYCLE
-
+export GOPATH=/home/bpotter/code/go
 umask 002
-
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="bpotter"
-
 export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 export  HISTSIZE=100000
@@ -46,6 +41,8 @@ alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 alias oocalc="libreoffice --calc"
 alias sum="sha1sum"
 alias h="sha1sum"
+alias jamc="rdesktop -g 1000x1390 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
+alias bigjamc="rdesktop -g 1900x2048 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 function cdw() {cd `cdw.py "$@"`;}
 function o() {/usr/bin/vendor_perl/mimeopen "$@"&;} #xdg-open is flakey
 
@@ -63,14 +60,16 @@ alias got='git '
 alias get='git '
 alias hit='git '
 
-PATH=$PATH:$HOME/bin:$HOME/code/tools/bin
-export PYTHONPATH="/home/bpotter/code/tools/lib/"
+PATH=$PATH:$HOME/bin:$HOME/code/tools/bin:$HOME/code/go/bin
+export PYTHONPATH="/home/bpotter/code/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp"
 export LD_LIBRARY_PATH=/lib
 
 export VISUAL=vim
 export EDITOR=vim
 ulimit -c unlimited
-export ORACLE_HOME=/usr/lib/oracle/11.2/client64/
+export ORACLE_HOME=$HOME/oracle/instantclient_12_1
+export DYLD_LIBRARY_PATH=$ORACLE_HOME
+export LD_LIBRARY_PATH=$ORACLE_HOME
 PATH=$ORACLE_HOME/bin:$PATH
 
 #added for home and end keys by bjp
@@ -100,6 +99,9 @@ export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# added by Miniconda3 3.7.0 installer
+export PATH="$PATH:/home/bpotter/miniconda3/bin"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
