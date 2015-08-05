@@ -60,8 +60,11 @@ alias got='git '
 alias get='git '
 alias hit='git '
 
+# Selecta shortcuts
+alias pk='kill `ps aux | selecta | awk '\''{print $2 }'\''`'
+
 PATH=$PATH:$HOME/bin:$HOME/code/tools/bin:$HOME/code/go/bin
-export PYTHONPATH="/home/bpotter/code/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp"
+export PYTHONPATH="/home/bpotter/code/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp:/home/bpotter/code/pcaptools/waas_brewery/:/home/bpotter/code/pcaptools/waas_brewery/waas_brewery/"
 export LD_LIBRARY_PATH=/lib
 
 export VISUAL=vim
@@ -92,10 +95,10 @@ alias ls='ls -CFG'
 alias gvim=mvim
 alias vimdiff=mvim -d
 alias o=open
-PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
-export PATH=/usr/local/bin:/usr/local/sbin:/Applications:/Users/bpotter/miniconda3/bin/:$PATH # brew on osx
+export PATH=/Users/bpotter/miniconda3/bin:/usr/local/bin:/usr/local/sbin:/Applications:$PATH # brew on osx
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
 export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
+eval `/usr/libexec/path_helper -s`
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
