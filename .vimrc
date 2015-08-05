@@ -87,7 +87,7 @@ nnoremap <C-T> :CommandT<CR>
 nnoremap <C-Y> :set linebreak wrap<CR>
 nnoremap <C-D> :set nolinebreak nowrap nospell paste smartindent<CR>
 "Latex Acroynmn and Latex Mode
-nnoremap <C-A> T i\ac{<Esc>t a}<Esc>
+"nnoremap <C-A> T i\ac{<Esc>t a}<Esc>
 nnoremap <C-L> :set tw=72 nopaste spell nosmartindent nowrap nolinebreak<CR>
 
 "C options
@@ -151,14 +151,46 @@ hi IndentGuidesOdd  guibg=#073642 ctermbg=8
 hi IndentGuidesEven guibg=#002b36 ctermbg=0
 
 " Insert date stamps
-nmap <F3> a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
-imap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+nmap <F3> a<C-R>=strftime("%Y-%m-%dT%H:%M:%S")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%dT%H:%M:%S")<CR>
 
 " Insert pdb line
-nmap <F5> Oimport pdb; pdb.set_trace()<CR><Esc>
-imap <F5> import pdb; pdb.set_trace()<CR>
+nmap <F5> Oimport pdb; pdb.set_trace()<Esc>
+imap <F5> import pdb; pdb.set_trace()
 
 " Insert pudb line
-nmap <F6> Oimport pudb; pudb.set_trace()<CR><Esc>
-imap <F6> import pudb; pudb.set_trace()<CR>
+nmap <F6> Oimport pudb; pudb.set_trace()<Esc>
+imap <F6> import pudb; pudb.set_trace()
+
+" Insert ipython line
+nmap <F7> Oimport IPython; IPython.embed()<Esc>
+imap <F7> import IPython; IPython.embed()
+
+"=====[ Highlight matches when jumping to next ]=============
+
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WildMenu', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+" Don't have to shift to get to : commands
+noremap ; :
+
+" Drag around those visual selections with the arrow keys
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
 

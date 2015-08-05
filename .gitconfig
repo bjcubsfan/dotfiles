@@ -3,7 +3,7 @@
      email = bjpotter@gmail.com
  [core]
      editor = vim
-     autocrlf = input
+	autocrlf = false
      safecrlf = true
      pager = less -FRSX
  [diff]
