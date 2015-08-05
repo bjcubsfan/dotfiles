@@ -5,7 +5,7 @@
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
-require("awful.autofocus")
+--require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -176,7 +176,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 2 then right_layout:add(wibox.widget.systray()) end
+    if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -260,11 +260,11 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
     awful.key({ }, "XF86PowerOff", function () awful.util.spawn("xscreensaver-command -lock") end),
     --Volume keyboard control
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl up") end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("pulseaudio-ctl down") end),
+    awful.key({ modkey, }, "p", function () awful.util.spawn_with_shell("/home/bpotter/bin/play_pause_music.zsh") end),
     awful.key({ }, "XF86AudioMute",        function () awful.util.spawn_with_shell("pulseaudio-ctl mute") end)
 )
 
@@ -434,9 +434,9 @@ function run_once(prg,arg_string,pname,screen)
 end
 
 -- B. J.'s startup programs
-run_once("xscreensaver","-no-splash")
-run_once("dropboxd")
-run_once("gnome-do")
-run_once("xmodmap", "/home/bpotter/.Xmodmap")
-run_once("/bin/bash /usr/bin/devmon")
+--run_once("xscreensaver","-no-splash")
+--run_once("dropboxd")
+--run_once("gnome-do")
+--run_once("xmodmap", "/home/bpotter/.Xmodmap")
+--run_once("/bin/bash /usr/bin/devmon")
 --run_once("pidgin", "--config=/home/bpotter/Private/chat_logs/pidgin")
