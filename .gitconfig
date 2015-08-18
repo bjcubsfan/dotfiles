@@ -3,9 +3,11 @@
      email = bjpotter@gmail.com
  [core]
      editor = vim
-	autocrlf = false
+     autocrlf = false
      safecrlf = true
      pager = less -FRSX
+ [alias]
+     tbr = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD)%(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
  [diff]
      tool = meld
  [difftool]
@@ -38,4 +40,4 @@
  # Need to set this to squelch message
  # This will push to upstream only if same name
  [push]
-	default = current
+     default = current
