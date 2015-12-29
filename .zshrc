@@ -40,7 +40,7 @@ alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
 alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
 alias oocalc="libreoffice --calc"
 alias sum="sha1sum"
-alias h="sha1sum"
+alias h="sha256sum"
 alias jamc="rdesktop -g 1000x1390 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 alias bigjamc="rdesktop -g 1900x2048 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 function cdw() {cd `cdw.py "$@"`;}
@@ -70,7 +70,6 @@ export LD_LIBRARY_PATH=/lib
 export VISUAL=vim
 export EDITOR=vim
 ulimit -c unlimited
-export ORACLE_HOME=$HOME/oracle/instantclient_12_1
 export DYLD_LIBRARY_PATH=$ORACLE_HOME
 export LD_LIBRARY_PATH=$ORACLE_HOME
 PATH=$ORACLE_HOME/bin:$PATH
