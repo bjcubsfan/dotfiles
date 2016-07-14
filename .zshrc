@@ -5,7 +5,7 @@ umask 002
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="bpotter"
-export DISABLE_AUTO_UPDATE=true
+#export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 export  HISTSIZE=100000
 unsetopt correct_all
@@ -35,14 +35,15 @@ alias rscp="rsync -aP"
 alias less="less -FRSX"
 alias cbcopy="xsel --clipboard --input"
 alias cbpaste="xsel --clipboard --output"
-alias sit="$HOME/code/personal/bpotter/sit_stand_log.py -s"
-alias stand="$HOME/code/personal/bpotter/sit_stand_log.py -t"
-alias away="$HOME/code/personal/bpotter/sit_stand_log.py -a"
+alias sit="$HOME/code/waas/personal/bpotter/sit_stand_log.py -s"
+alias stand="$HOME/code/waas/personal/bpotter/sit_stand_log.py -t"
+alias away="$HOME/code/waas/personal/bpotter/sit_stand_log.py -a"
 alias oocalc="libreoffice --calc"
 alias sum="sha1sum"
 alias h="sha256sum"
 alias jamc="rdesktop -g 1000x1390 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 alias bigjamc="rdesktop -g 1900x2048 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
+alias ping="ping -4"
 function cdw() {cd `cdw.py "$@"`;}
 function o() {/usr/bin/vendor_perl/mimeopen "$@"&;} #xdg-open is flakey
 
@@ -63,7 +64,7 @@ alias hit='git '
 # Selecta shortcuts
 alias pk='kill `ps aux | selecta | awk '\''{print $2 }'\''`'
 
-PATH=$PATH:$HOME/bin:$HOME/code/tools/bin:$HOME/code/go/bin
+PATH=$PATH:$HOME/bin:$HOME/code/waas/tools/bin:$HOME/code/waas/go/bin
 export PYTHONPATH="/home/bpotter/code/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp:/home/bpotter/code/pcaptools/waas_brewery/:/home/bpotter/code/pcaptools/waas_brewery/waas_brewery/"
 export LD_LIBRARY_PATH=/lib
 
@@ -94,6 +95,7 @@ alias ls='ls -CFG'
 alias gvim=mvim
 alias vimdiff=mvim -d
 alias o=open
+alias ping="ping"
 export PATH=/Users/bpotter/miniconda3/bin:/usr/local/bin:/usr/local/sbin:/Applications:$PATH # brew on osx
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
 export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
