@@ -1,4 +1,5 @@
 # Path to your oh-my-zsh configuration.
+source ~/.local_secrets.sh
 export ZSH=$HOME/.oh-my-zsh
 export GOPATH=/home/bpotter/code/go
 umask 002
@@ -14,7 +15,6 @@ setopt EXTENDED_GLOB
 setopt NULL_GLOB
 source ~/.git_completion.sh
 source ~/.pycompletion.sh
-source ~/.local_secrets.sh
 
 # Customize to your needs...
 
