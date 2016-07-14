@@ -4,7 +4,7 @@ export GOPATH=/home/bpotter/code/go
 umask 002
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="bpotter"
+export ZSH_THEME=$MY_ZSH_THEME
 #export DISABLE_AUTO_UPDATE=true
 source $ZSH/oh-my-zsh.sh
 export  HISTSIZE=100000
