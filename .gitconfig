@@ -1,6 +1,7 @@
  [user]
      name = B. J. Potter
      email = bjpotter@gmail.com
+	signingkey = ABBF3069002C5AE3
  [core]
      editor = vim
      autocrlf = false
@@ -39,3 +40,5 @@
  # This will push to upstream only if same name
  [push]
      default = current
+[commit]
+	gpgsign = true

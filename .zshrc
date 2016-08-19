@@ -65,7 +65,7 @@ alias hit='git '
 alias pk='kill `ps aux | selecta | awk '\''{print $2 }'\''`'
 
 PATH=$PATH:$HOME/bin:$HOME/code/waas/tools/bin:$HOME/code/waas/go/bin
-export PYTHONPATH="/home/bpotter/code/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp:/home/bpotter/code/pcaptools/waas_brewery/:/home/bpotter/code/pcaptools/waas_brewery/waas_brewery/"
+# export PYTHONPATH="/home/bpotter/code/waas/tools/lib/:/home/bpotter/.python-eggs/cx_Oracle-5.1.3-py2.7-linux-x86_64.egg-tmp:/home/bpotter/code/waas/pcaptools/waas_brewery/:/home/bpotter/waas/code/pcaptools/waas_brewery/waas_brewery/"
 export LD_LIBRARY_PATH=/lib
 
 export VISUAL=vim
@@ -98,7 +98,7 @@ alias o=open
 alias ping="ping"
 export PATH=/Users/bpotter/miniconda3/bin:/usr/local/bin:/usr/local/sbin:/Applications:$PATH # brew on osx
 # export PATH=/Library/Frameworks/Python.framework/Versions/7.2/bin:$PATH # EPD OS X
-export PYTHONPATH=~/code/tools/lib/:~/src:~/src/tools/lib:$PYTHONPATH
+export PYTHONPATH=~/code/waas/tools/lib/:$PYTHONPATH
 eval `/usr/libexec/path_helper -s`
 fi
 
