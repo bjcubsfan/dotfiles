@@ -109,9 +109,6 @@ export PATH="$PATH:/home/bpotter/miniconda3/bin"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# Gnome-terminal fix to open in same dir
-chpwd_functions+=(__vte_osc7) # or replace __vte_ps1 with __vte_osc7 after updating vte to 0.34.5
-
 #Use vi mode
 set -o vi
 bindkey -v

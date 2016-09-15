@@ -1,4 +1,14 @@
-PROMPT='[%*] %{$fg[blue]%}%n%{$fg[cyan]%}@%{$fg[cyan]%}%m%{$fg[magenta]%}➜ %{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}» '
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    local EXIT_CODE_PROMPT=' '
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    echo "$EXIT_CODE_PROMPT"
+  fi
+}
+PROMPT='[%*]$(check_last_exit_code) %{$fg[blue]%}%n%{$fg[cyan]%}@%{$fg[cyan]%}%m%{$fg[magenta]%}➜ %{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}» '
 RPROMPT=''
 
 # git theming
