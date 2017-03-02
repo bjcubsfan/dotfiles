@@ -328,8 +328,14 @@ globalkeys = awful.util.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+    awful.key({ modkey }, "e", function() menubar.show() end,
+              {description = "show the menubar", group = "launcher"}),
+	awful.key({ }, "XF86PowerOff", function () awful.util.spawn("xscreensaver-command -lock") end),
+    --Volume keyboard control
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn_with_shell("amixer set Master 2%+") end),
+    awful.key({ }, "XF86AudioMute",        function () awful.util.spawn_with_shell("amixer set Master toggle") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("amixer set Master 2%-") end),
+    awful.key({ modkey, }, "p", function () awful.util.spawn_with_shell("/home/bpotter/bin/play_pause_music.zsh") end)
 )
 
 clientkeys = awful.util.table.join(
