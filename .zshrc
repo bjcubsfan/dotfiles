@@ -44,6 +44,7 @@ alias h="sha256sum"
 alias jamc="rdesktop -g 1000x1390 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 alias bigjamc="rdesktop -g 1900x2048 -a 16 -P -z -u 'bj ctr potter' -d faa -K jamcxww00108332.amc.faa.gov -r clipboard:CLIPBOARD"
 alias ping="ping -4"
+alias dt="date '+%Y-%m-%dT%H:%M'"
 function cdw() {cd `cdw.py "$@"`;}
 function o() {/usr/bin/vendor_perl/mimeopen "$@"&;} #xdg-open is flakey
 
@@ -119,3 +120,6 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 export KEYTIMEOUT=1
+
+# Fix a problem with gpg/git
+export GPG_TTY=$(tty)
