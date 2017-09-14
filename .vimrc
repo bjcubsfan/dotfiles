@@ -26,7 +26,6 @@ set expandtab    " insert space characters whenever the tab key is pressed
 set tabstop=4    " Controls the number of space characters that will be inserted when t
 set shiftwidth=4 " Changes the number of space characters inserted for indentation
 set hlsearch     " Highlight Search Results
-set background=dark "If you use a dark background set this to make the fonts a better c
 set nowrap
 syntax enable
 syntax on
@@ -45,6 +44,7 @@ set softtabstop=4
 
 " added by BJ
 set t_Co=256
+set background=dark
 colorscheme solarized
 "colorscheme ir_black
 "colorscheme ps_color
